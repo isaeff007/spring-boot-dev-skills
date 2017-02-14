@@ -34,17 +34,18 @@ public  class InitData {
         skillRepository.save(spring);
         skillRepository.save(osgi);
 
+
         List<Developer> developers = new LinkedList<Developer>();
         developers.add(new Developer("John", "Smith", "john.smith@example.com",
-            Arrays.asList(new Skill[] { javascript, angularjs })));
+            Arrays.asList(new Skill[] { javascript, angularjs }), new Address("Garden St.","13", "07039", "Livingston","USA")));
         developers.add(new Developer("Mark", "Johnson", "mjohnson@example.com",
-            Arrays.asList(new Skill[] { javascript, angularjs })));
+            Arrays.asList(new Skill[] { javascript, angularjs }), new Address("Glenlake Avenue ","7920", "34786","Ankeny", "USA")));
         developers.add(new Developer("Michael", "Williams", "michael.williams@example.com",
-            Arrays.asList(new Skill[] { angularjs, java })));
+            Arrays.asList(new Skill[] { angularjs, java }), new Address("Fairview Street","8547C ", "36532", "Fairhope", "USA")));
         developers.add(new Developer("Fred", "Miller", "f.miller@example.com",
-            Arrays.asList(new Skill[] { spring, angularjs, javascript })));
+            Arrays.asList(new Skill[] { spring, angularjs, javascript }), new Address("West Arch Drive","42", "07039", "Ontario","Canada")));
         developers.add(new Developer("Bob", "Brown", "brown@example.com",
-            Arrays.asList(new Skill[] { osgi })));
+            Arrays.asList(new Skill[] { osgi }), new Address("Bay Drive","85", "07039", "Vancouver","Canada")));
         developerRepository.save(developers);
     }
 }

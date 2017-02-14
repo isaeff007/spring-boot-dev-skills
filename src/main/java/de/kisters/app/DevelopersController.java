@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * The controller will map request URIs to view templates
  * and perform all necessary processing in between.
@@ -31,10 +35,24 @@ import org.springframework.web.bind.annotation.RequestParam;
         return "developer";
     }
 
-    @RequestMapping(value = "/developers", method = RequestMethod.GET) public String developersList(Model model) {
-        model.addAttribute("developers", developerRepo.findAll()); //data to be passed to view template
+    @RequestMapping(value="/developer/{id}", method=RequestMethod.POST) public String removeDeveloper(@PathVariable Long id, Model model) {
+        developerRepo.delete(developerRepo.findOne(id));
+        model.addAttribute("skills", skillRepo.findAll());
+        return "developers";
+    }
+
+
+    @RequestMapping(value = "/developers", method = RequestMethod.GET) public String developersList(@RequestParam(value = "firstname", required = false) Optional<String> firstname, Model model) {
+        List<Developer> devList = new ArrayList<>();
+        if (firstname.isPresent()){
+            devList = developerRepo.findByFirstName(firstname.get());
+        }else {
+            devList = developerRepo.findAll();
+        }
+        model.addAttribute("developers", devList); //data to be passed to view template
         return "developers"; //just a name of template to show with
     }
+
 
     /**
      * Create and save new developer ant then redirect to the developer view (for this new one)

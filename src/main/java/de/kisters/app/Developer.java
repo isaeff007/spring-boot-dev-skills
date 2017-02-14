@@ -3,11 +3,13 @@ package de.kisters.app;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.List;
@@ -29,18 +31,21 @@ public class Developer {
     private String email;
     @ManyToMany
     List<Skill> skills;
+    @OneToOne(cascade = CascadeType.ALL)
+    Address address;
 
     public Developer(){
         super();
     }
 
     public Developer(String firstName, String lastName, String email,
-        List<Skill> skills) {
+        List<Skill> skills, Address address) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.skills = skills;
+        this.address = address;
     }
 
     public boolean hasSkill(Skill skill){

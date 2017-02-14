@@ -30,6 +30,9 @@
 				    		</span>
                         </td>
                         <td>
+                          <td th:text="${developer.address.country}"></td>
+                        </td>
+                        <td>
                             <a th:href="@{/developer/{id}(id=${developer.id})}">view</a>
                         </td>
                     </tr>
